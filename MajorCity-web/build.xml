@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MajorCity-web" default="all" basedir="./src/main/webapp">
+
+    <property name="ruby.bin" value="C:/Ruby/bin" />
+
+    <target name="all" depends="init,compass" />
+
+    <condition property="done.setup">
+        <available file="./resources/config.rb" />
+    </condition>
+
+    <target name="init" unless="done.setup">
+        <mkdir dir="resources" />
+        <exec executable="${ruby.bin}/ruby" dir="resources">
+            <arg value="${ruby.bin}/compass" />
+            <arg value="create" />
+            <arg value="--sass-dir" />
+            <arg value="scss" />
+            <arg value="--css-dir" />
+            <arg value="css" />
+            <arg value="--output-style" />
+            <arg value="expanded" />
+            <arg value="--no-line-comments" />
+        </exec>
+    </target>
+
+    <target name="compass">
+        <exec executable="${ruby.bin}/ruby" dir="resources">
+            <arg value="${ruby.bin}/compass" />
+            <arg value="compile" />
+        </exec>
+    </target>
+
+</project>
